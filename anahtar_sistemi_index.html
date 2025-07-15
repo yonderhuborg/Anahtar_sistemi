@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Anahtar Alma Görevi</title>
+<style>
+	body { font-family: Arial, sans-serif; background:#121212; color:#eee; text-align:center; padding: 2em; }
+	button { padding: 1em 2em; font-size: 1.2em; margin-top: 1em; border:none; border-radius: 5px; }
+	button:disabled { background: #555; color: #999; cursor: not-allowed; }
+	#copyBtn { background:#28a745; color:white; }
+</style>
+</head>
+<body>
+
+<h1>Görev: Instagram Hesabını Takip Et</h1>
+<p>Görevi tamamladıktan sonra 1 dakika bekleyin, ardından anahtarınız aktif olacak.</p>
+
+<a href="https://www.instagram.com/yonderselex" target="_blank" style="color:#0af; font-weight:bold;">Yonderselex Instagram Hesabı</a>
+
+<div id="timer" style="font-size:1.5em; margin-top:1em;">60</div>
+
+<button id="getKeyBtn" disabled>Anahtar Al</button>
+
+<div id="keyContainer" style="margin-top:1em; display:none;">
+	<input type="text" id="keyInput" readonly style="width:300px; padding:0.5em; font-size:1em;" />
+	<button id="copyBtn">Kopyala</button>
+</div>
+
+<script>
+	let timer = 60;
+	let timerEl = document.getElementById("timer");
+	let getKeyBtn = document.getElementById("getKeyBtn");
+	let keyContainer = document.getElementById("keyContainer");
+	let keyInput = document.getElementById("keyInput");
+	let copyBtn = document.getElementById("copyBtn");
+
+	let countdown = setInterval(() => {
+		timer--;
+		timerEl.textContent = timer;
+		if (timer <= 0) {
+			clearInterval(countdown);
+			timerEl.textContent = "Görev Tamamlandı!";
+			getKeyBtn.disabled = false;
+		}
+	}, 1000);
+
+	const generatedKey = "ABC123DEF456";
+
+	getKeyBtn.addEventListener("click", () => {
+		keyContainer.style.display = "block";
+		keyInput.value = generatedKey;
+	});
+
+	copyBtn.addEventListener("click", () => {
+		keyInput.select();
+		keyInput.setSelectionRange(0, 99999);
+		navigator.clipboard.writeText(keyInput.value);
+		alert("Anahtar kopyalandı!");
+	});
+</script>
+
+</body>
+</html>
